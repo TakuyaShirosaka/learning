@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <script>
+      function callAPI() {
+        const ip = document.querySelector('#send-ip') || 'localhost:1323';
+        const request = document.querySelector('#request');  
+        const display = document.querySelector('#response > p');
+        
+        const url = 'http://' + ip.value + '/api/users/request';
+        fetch(url, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({name: request.value})
+        })
+          .then(response => {
+            return response.json();
+          })
+          .then(json => {
+            if (json.code) {
+              throw Error('エラーコード: ' + json.code + ', エラーメッセージ: ' + json.message);
+            };
+            const result = "相手の名前: " + json.my_name + ", 貴方の名前: " + (json.your_name || "hogehoge丸");
+                        
+            display.innerHTML = result;
+          })
+          .catch(error => {
+            alert(error)
+          })
+      }
+    </script>
+  </head>
+  <body>
+    <h1>{{index . "content-name"}}</h1>
+  
+    <h2>送信先IP、名前(ニックネームも可) を入力して下さい</h2>
+    <label>送信先IP</label>
+    <input type="text" id="send-ip" value="localhost:1323">
+    <label>名前</label>
+    <input type="text" id="request">
+    <button type="submit" onClick="callAPI()">submit</button>
+ 
+    <h2>レスポンス表示欄</h2>
+    <div id="response">
+      <p></p>
+    </div>
+  </body>
+</html>
