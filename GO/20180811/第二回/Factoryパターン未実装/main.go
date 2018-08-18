@@ -1,12 +1,11 @@
 package main
 
 import (
-
 	// 頭にドットを付けると package 名を省略出来る
 	"fmt"
 
-	. "github.com/akeyace/learning-golang-over-OOP/lesson_02/02_about_golang/animal"
-	. "github.com/akeyace/learning-golang-over-OOP/lesson_02/02_about_golang/food"
+	. "./animal"
+	. "./food"
 )
 
 func main() {
