@@ -11,10 +11,14 @@ import (
 
 func main() {
 	// petType, foodType が引数で与えられたとします
+	// animal.goの構造体:Dog
+	// food.goの構造体:Meat
 	petType := animal.Dog{}
 	foodType := food.Meat{}
 
 	// factory の instance を取得します
+	// petType:animal.Dog{}
+	// foodType:food.Meat{}
 	fa := factory.NewFactory(petType, foodType)
 
 	// factory から Animal型 の instance を取得します

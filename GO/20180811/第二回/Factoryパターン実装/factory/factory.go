@@ -19,6 +19,7 @@ func (f Factory) FoodFactoryMethod() food.InterfaceFood {
 }
 
 func NewFactory(a animal.InterfaceAnimal, f food.InterfaceFood) Factory {
+
 	var ai animal.InterfaceAnimal
 	var fi food.InterfaceFood
 
