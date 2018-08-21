@@ -41,7 +41,7 @@ func main() {
     e := echo.New()
 
     renderer := &TemplateRenderer{
-             templates: template.Must(template.ParseGlob("public/views/*.html")),
+             templates: template.Must(template.ParseGlob("../public/views/*.html")),
     }
     e.Renderer = renderer
 
@@ -71,7 +71,7 @@ func main() {
         }
 
         response := new(AnswerResponse)
-        response.MyName = "城阪拓哉"
+        response.MyName = "XXXXX"
         response.YourName = request.Name
            
         //ip := net.ParseIP(c.RealIP()).To4()  
