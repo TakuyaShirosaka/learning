@@ -30,6 +30,13 @@ type Server struct {
 	Port int
 }
 
+// ルーティングの登録
+func HandleAddGrp() {
+	fmt.Println("HandleAddGrp start")
+	http.HandleFunc("/", HelloServer)
+	http.HandleFunc("/test", TestServer)
+}
+
 // オプションhostの値を取る
 func Host(host string) func(*Server) {
 	return func(s *Server) {
@@ -45,13 +52,6 @@ func Port(port int) func(*Server) {
 		s.Port = port
 		http.ListenAndServe(":"+strconv.Itoa(s.Port), nil)
 	}
-}
-
-// ルーティングの登録
-func HandleAddGrp() {
-	fmt.Println("HandleAddGrp start")
-	http.HandleFunc("/", HelloServer)
-	http.HandleFunc("/test", TestServer)
 }
 
 // これは、オプション関数のリストを受け取る関数です。
@@ -86,7 +86,7 @@ func main() {
 	var host = flag.String("host", "127.0.0.1", "host")
 	var port = flag.Int("port", 8080, "port")
 
-	//パラメータの解析、flagを使用する場合は必須
+	// パラメータの解析、flagを使用する場合は必須
 	flag.Parse()
 
 	// ログ出力
