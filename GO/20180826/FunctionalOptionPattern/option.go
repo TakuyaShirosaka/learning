@@ -17,7 +17,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -40,7 +39,6 @@ func HandleAddGrp() {
 // オプションhostの値を取る
 func Host(host string) func(*Server) {
 	return func(s *Server) {
-		fmt.Printf("server host: %s \n", host)
 		s.Host = host
 	}
 }
@@ -48,18 +46,26 @@ func Host(host string) func(*Server) {
 // オプションportの値を取る
 func Port(port int) func(*Server) {
 	return func(s *Server) {
-		fmt.Printf("port: %d \n", port)
+		http.ListenAndServe(":"+strconv.Itoa(port), nil)
 		s.Port = port
-		http.ListenAndServe(":"+strconv.Itoa(s.Port), nil)
 	}
 }
 
 // これは、オプション関数のリストを受け取る関数です。
 // Serverが持つ要素に紐づく関数を実行していきます。
 func NewServer(opts ...func(*Server)) *Server {
-	s := &Server{}
 
-	// 渡されたオプション関数を実行していく
+	//デフォルト値を設定
+	s := &Server{
+		Host: "127.0.0.1",
+		Port: 8080,
+	}
+
+	//デフォルト値確認
+	fmt.Printf("default-server host: %s \n", s.Host)
+	fmt.Printf("default-port: %d \n", s.Port)
+
+	// Serverのオプション関数を実行していく
 	for _, opt := range opts {
 		opt(s)
 	}
@@ -69,7 +75,7 @@ func NewServer(opts ...func(*Server)) *Server {
 
 // http.HandleFuncに登録する関数 ,http.ResponseWriterとhttp.Requestを受ける
 func HelloServer(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Hello, World")
+	fmt.Println("Hello, World\n")
 }
 
 func TestServer(w http.ResponseWriter, r *http.Request) {
@@ -77,17 +83,6 @@ func TestServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
-	//flagパッケージはコマンドパラメータの解析を行う
-	//第一引数はオプション名です
-	//第二引数はオプションのデフォルト値です。オプションを指定しない場合は、デフォルト値がオプションの値に入ります。
-	//第三引数は、オプションの説明を記述しています。記述したメッセージは、flagパッケージの機能であるhelpオプションを使用した際に扱われます。※後述の「helpオプション」を参照
-
-	var host = flag.String("host", "127.0.0.1", "host")
-	var port = flag.Int("port", 8080, "port")
-
-	// パラメータの解析、flagを使用する場合は必須
-	flag.Parse()
 
 	// ログ出力
 	log.Printf("Start Go HTTP Server")
@@ -97,8 +92,7 @@ func main() {
 
 	// structに入力値を値渡し、NewServer側でオプションの設定を実行する
 	s := NewServer(
-		Host(*host),
-		Port(*port),
+		Port(8090),
 	)
 
 	// エラー処理
