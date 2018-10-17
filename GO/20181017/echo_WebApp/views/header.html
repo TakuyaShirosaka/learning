@@ -1,0 +1,25 @@
+{{define "header"}}
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- navbar-inverse で黒系ナビゲーションの指定をしています。-->
+    <!-- navbar-fixed-top でヘッダー固定の指定をしています。-->
+    <div class="container">
+    <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+    <!--button~はウインドウのサイズが780px以下になった時に表示されます。-->
+    <a class="navbar-brand" href="#">Bootstrap</a>
+    <!--こちらにサイト名を入れます。-->
+    </div>
+    <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#home">HOME</a></li>
+      <li><a href="#Page1">Page1</a></li>
+      <li><a href="#Page2">Page2</a></li>
+      <li><a href="#Page3">Page3</a></li>
+      <li><a href="#Page4">Page4</a></li>
+      <li><a href="#Page5">Page5</a></li>
+    </ul>
+    </div>
+    <!--/.nav-collapse -->
+    </div>
+</div>
+{{end}}
