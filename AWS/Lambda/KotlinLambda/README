@@ -1,0 +1,16 @@
+KotlinでAWS Lambdaを実行可能にする
+
+開発環境はEclipse、Gradle IDE Pack導入済み
+Gradleタスクからclean→buildで＜プロジェクト名＞\build\distributions配下にzipができる
+
+後はzipをlambdaにアップロード
+
+
+
+
+
+
+
+
+
+
